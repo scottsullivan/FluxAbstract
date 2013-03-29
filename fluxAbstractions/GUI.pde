@@ -7,8 +7,8 @@ void setupGUI() {
   controlP5.addTextfield("imgOneFileName", 50, 25, 150, 20).setLabel("image 1 file name").setAutoClear(false);
   controlP5.addTextfield("imgTwoFileName", 250, 25, 150, 20).setLabel("image 2 file name").setAutoClear(false);
   controlP5.addSlider("speed").setPosition(450, 25).setSize(150, 20).setRange(0, 200).setValue(100);
-  controlP5.addSlider("angle").setPosition(650, 25).setSize(150, 20).setRange(0, 200).setValue(100);
-  controlP5.addSlider("thickness").setPosition(850, 25).setSize(150, 20).setRange(0, 200).setValue(100);
+  controlP5.addSlider("angle").setPosition(650, 25).setSize(150, 20).setRange(-width/2, width/2).setValue(100);
+  controlP5.addSlider("thickness").setPosition(850, 25).setSize(150, 20).setRange(15, width/2).setValue(0);
   controlP5.getController("speed").getCaptionLabel().align(ControlP5.LEFT, ControlP5.BOTTOM_OUTSIDE).setPaddingX(0);
   controlP5.getController("angle").getCaptionLabel().align(ControlP5.LEFT, ControlP5.BOTTOM_OUTSIDE).setPaddingX(0);
   controlP5.getController("thickness").getCaptionLabel().align(ControlP5.LEFT, ControlP5.BOTTOM_OUTSIDE).setPaddingX(0);

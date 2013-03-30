@@ -24,11 +24,13 @@ ControlP5 controlP5;
 
 
 SDrop drop;
+SDrop dropTwo;
 
 float thickness, speed, angle, topRight, topLeft, bottomRight, bottomLeft, speeder;
 PImage imgOne, imgTwo;
 
 MyDropListener dropTarget;
+MyDropListener dropTargetTwo;
 
 public void setup() {
   size(1280, 800, P2D);
@@ -44,8 +46,12 @@ public void draw() {
   background(255);
   drawGUI();
 
-  dropTarget.draw();
+  dropTarget.draw(49, 15, 86, 48);
   if (imgOne !=null) {
+  }
+
+  dropTargetTwo.draw(149, 15, 86, 48);
+  if (imgTwo !=null) {
   }
 
   for (int i = -50; i < 150; i = i + 2) {
@@ -56,8 +62,12 @@ public void draw() {
 
 public void setupGUI() {
   drop = new SDrop(this);
-  dropTarget = new MyDropListener();
+  dropTarget = new MyDropListener(49, 15, 86, 48);
   drop.addDropListener(dropTarget);
+
+  dropTwo = new SDrop(this);
+  dropTargetTwo = new MyDropListener(149, 15, 86, 48);
+  dropTwo.addDropListener(dropTargetTwo);
 
   controlP5 = new ControlP5(this);
   PFont GUIfont = createFont("arial", 12);
@@ -76,6 +86,28 @@ public void setupGUI() {
 
 public void drawGUI() {
   drawGUIBackground();
+
+  //drag and drop targets
+  textureMode(NORMAL);
+  textureWrap(REPEAT); 
+  beginShape();
+  texture(imgOne);
+  vertex(49, 15, 0, 0);
+  vertex(135, 15, 1, 0);
+  vertex(135, 63, 1, 1);
+  vertex(49, 63, 0, 1);
+  endShape(CLOSE);
+
+  //drag and drop targets
+  textureMode(NORMAL);
+  textureWrap(REPEAT); 
+  beginShape();
+  texture(imgTwo);
+  vertex(149, 15, 0, 0);
+  vertex(235, 15, 1, 0);
+  vertex(235, 63, 1, 1);
+  vertex(149, 63, 0, 1);
+  endShape(CLOSE);
 }
 
 public void drawGUIBackground() {
@@ -83,55 +115,42 @@ public void drawGUIBackground() {
   rect(0, 0, width, 80);
 }
 
+
 public void dropEvent(DropEvent theDropEvent) {
   if (theDropEvent.isImage()) {
-    imgOne = theDropEvent.loadImage();
-  }
+      imgOne = theDropEvent.loadImage();
+    }
 }
 
-class MyDropListener extends DropListener {
+  class MyDropListener extends DropListener {
 
-  int myColor;
+    int boxX, boxY, boxWidth, boxHeight, myColor;
 
-  MyDropListener() {
-    myColor = color(0xffFFFFFF);
-    // set a target rect for drop event.
-    setTargetRect(49, 15, 86, 48);
+    MyDropListener(int boxX, int boxY, int boxWidth, int boxHeight) {
+      myColor = color(0xffFFFFFF);
+      // set a target rect for drop event.
+      setTargetRect(boxX, boxY, boxWidth, boxHeight);
+    }
+
+    public void draw(int boxX, int boxY, int boxWidth, int boxHeight) {
+      noFill();
+      stroke(myColor);
+      rect(boxX, boxY, boxWidth, boxHeight);
+    }
+
+    public void dropEnter() {
+      myColor = color(0xffFF0000);
+    }
+
+    public void dropLeave() {
+      myColor = color(255);
+    }
+
+    public void dropEvent(DropEvent theEvent) {
+      println("Dropped on MyDropListener");
+    }
   }
 
-  public void draw() {
-    noFill();
-    stroke(myColor);
-    rect(49, 15, 86, 48);
-
-    textureMode(NORMAL);
-    textureWrap(REPEAT); 
-
-    beginShape();
-    texture(imgOne);
-    vertex(49, 15, 0, 0);
-    vertex(135, 15, 1, 0);
-    vertex(135, 63, 1, 1);
-    vertex(49, 63, 0, 1);
-    endShape(CLOSE);
-  }
-
-  // if a dragged object enters the target area.
-  // dropEnter is called.
-  public void dropEnter() {
-    myColor = color(0xffFF0000);
-  }
-
-  // if a dragged object leaves the target area.
-  // dropLeave is called.
-  public void dropLeave() {
-    myColor = color(255);
-  }
-
-  public void dropEvent(DropEvent theEvent) {
-    println("Dropped on MyDropListener");
-  }
-}
 public void renderOne(int offset, PImage img) {
   float topRight = (thickness * offset) + angle + thickness;
   float topLeft = topRight - thickness;

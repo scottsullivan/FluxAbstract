@@ -10,7 +10,6 @@ void setup() {
   background(255);
   smooth();
   noStroke();
-  frameRate(10);
   imgOne = loadImage("solar.jpg");
   imgTwo = loadImage("mike.jpg");
 

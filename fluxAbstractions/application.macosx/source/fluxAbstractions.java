@@ -19,18 +19,20 @@ public class fluxAbstractions extends PApplet {
 
 //fastco
 
+//import gifAnimation.*;
+//import processing.opengl.*;
+//GifMaker gifExport;
+
 
 ControlP5 controlP5;
 
 
-SDrop drop;
-SDrop dropTwo;
+SDrop dropOne;
 
 float thickness, speed, angle, topRight, topLeft, bottomRight, bottomLeft, speeder;
 PImage imgOne, imgTwo;
 
-MyDropListener dropTarget;
-MyDropListener dropTargetTwo;
+DropListenerOne dropTargetOne;
 
 public void setup() {
   size(1280, 800, P2D);
@@ -40,18 +42,17 @@ public void setup() {
   imgOne = loadImage("emptypic.jpg");
   imgTwo = loadImage("emptypic.jpg");
   setupGUI();
+
+//  gifExport = new GifMaker(this, "export.gif");
+//  gifExport.setRepeat(0); // make it an "endless" animation
 }
 
 public void draw() {
   background(255);
   drawGUI();
 
-  dropTarget.draw(49, 15, 86, 48);
+  dropTargetOne.draw(49, 15, 186, 48);
   if (imgOne !=null) {
-  }
-
-  dropTargetTwo.draw(149, 15, 86, 48);
-  if (imgTwo !=null) {
   }
 
   for (int i = -50; i < 150; i = i + 2) {
@@ -60,20 +61,27 @@ public void draw() {
   }
 }
 
-public void setupGUI() {
-  drop = new SDrop(this);
-  dropTarget = new MyDropListener(49, 15, 86, 48);
-  drop.addDropListener(dropTarget);
 
-  dropTwo = new SDrop(this);
-  dropTargetTwo = new MyDropListener(149, 15, 86, 48);
-  dropTwo.addDropListener(dropTargetTwo);
+//void record() {
+//  gifExport.setDelay(1);
+//  gifExport.addFrame();
+//}
+//
+//void export() {
+//  gifExport.finish();
+//}
+
+public void setupGUI() {
+  dropOne = new SDrop(this);
+  dropTargetOne = new DropListenerOne(49, 15, 86, 48);
+  dropOne.addDropListener(dropTargetOne);
 
   controlP5 = new ControlP5(this);
   PFont GUIfont = createFont("arial", 12);
   controlP5.setControlFont(GUIfont);
   //buttonstuff ("function it fires", ?, XPOS, YPOS, Width, Height).setLabel("LABEL"); 
-  controlP5.addButton("item1", 50, width - 150, 25, 100, 20).setLabel("Export .gif");
+  controlP5.addButton("export", 50, width - 150, 25, 100, 20).setLabel("Export .gif");
+  controlP5.addButton("record", 50, width - 250, 25, 100, 20).setLabel("record");
 
   controlP5.addSlider("speed").setPosition(450, 25).setSize(150, 20).setRange(-50, 50).setValue(2);
   controlP5.addSlider("angle").setPosition(650, 25).setSize(150, 20).setRange(-width/2, width/2).setValue(85).setLabel("slant");
@@ -118,40 +126,43 @@ public void drawGUIBackground() {
 
 public void dropEvent(DropEvent theDropEvent) {
   if (theDropEvent.isImage()) {
-      imgOne = theDropEvent.loadImage();
-    }
+    if(theDropEvent.x() < 135){
+    imgOne = theDropEvent.loadImage();
+    }else {imgTwo = theDropEvent.loadImage();}
+  }
 }
 
-  class MyDropListener extends DropListener {
+class DropListenerOne extends DropListener {
 
-    int boxX, boxY, boxWidth, boxHeight, myColor;
+  int boxX, boxY, boxWidth, boxHeight, myColor;
 
-    MyDropListener(int boxX, int boxY, int boxWidth, int boxHeight) {
-      myColor = color(0xffFFFFFF);
-      // set a target rect for drop event.
-      setTargetRect(boxX, boxY, boxWidth, boxHeight);
-    }
-
-    public void draw(int boxX, int boxY, int boxWidth, int boxHeight) {
-      noFill();
-      stroke(myColor);
-      rect(boxX, boxY, boxWidth, boxHeight);
-    }
-
-    public void dropEnter() {
-      myColor = color(0xffFF0000);
-    }
-
-    public void dropLeave() {
-      myColor = color(255);
-    }
-
-    public void dropEvent(DropEvent theEvent) {
-      println("Dropped on MyDropListener");
-    }
+  DropListenerOne(int boxX, int boxY, int boxWidth, int boxHeight) {
+    myColor = color(0xffFFFFFF);
+    // set a target rect for drop event.
+    setTargetRect(boxX, boxY, boxWidth, boxHeight);
   }
 
+  public void draw(int boxX, int boxY, int boxWidth, int boxHeight) {
+    noFill();
+    stroke(myColor);
+    rect(49, 15, 86, 48);
+    rect(149, 15, 86, 48);
+  }
+
+  public void dropEnter() {
+    myColor = color(0xffFF0000);
+  }
+
+  public void dropLeave() {
+    myColor = color(255);
+  }
+
+  public void dropEvent(DropEvent DropEventOne) {
+    println("Dropped");
+  }
+}
 public void renderOne(int offset, PImage img) {
+  noStroke();
   float topRight = (thickness * offset) + angle + thickness;
   float topLeft = topRight - thickness;
   float bottomLeft = thickness * offset - angle;

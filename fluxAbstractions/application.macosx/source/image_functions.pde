@@ -1,4 +1,5 @@
 void renderOne(int offset, PImage img) {
+  noStroke();
   float topRight = (thickness * offset) + angle + thickness;
   float topLeft = topRight - thickness;
   float bottomLeft = thickness * offset - angle;

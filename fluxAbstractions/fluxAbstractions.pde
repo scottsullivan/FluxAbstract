@@ -29,8 +29,8 @@ void setup() {
   imgTwo = loadImage("emptypic2.jpg");
 
   setupGUI();
-  
-  //gifExport.setRepeat(0);
+
+
   gifExport = new GifMaker(this, "export.gif", 1);
   gifExport.setQuality(1);
   gifExport.setSize(1280, 720);
@@ -58,6 +58,7 @@ void draw() {
 
 void record() {
   for (int i = 1; i < 10; i++) {
+    gifExport.setRepeat(0);
     gifExport.setDelay(33);
     renderOne(i, imgOne);
     renderTwo(i, imgTwo);

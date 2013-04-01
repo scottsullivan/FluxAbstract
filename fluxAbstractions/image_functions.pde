@@ -17,10 +17,10 @@ void renderOne(int offset, PImage img) {
 
   beginShape();
   texture(img);
-  vertex(topLeft, 80, tlMap + speeder, 0);
-  vertex(topRight, 80, trMap + speeder, 0);
-  vertex(bottomRight, height, brMap + speeder, 1);
-  vertex(bottomLeft, height, blMap + speeder, 1);
+  vertex(topLeft, 0, tlMap + speeder, 0);
+  vertex(topRight, 0, trMap + speeder, 0);
+  vertex(bottomRight, height - 80, brMap + speeder, 1);
+  vertex(bottomLeft, height - 80, blMap + speeder, 1);
   endShape(CLOSE);
 
   if (speeder < 1) {
@@ -48,10 +48,10 @@ void renderTwo(int offset, PImage img) {
 
   beginShape();
   texture(img);
-  vertex(topLeft, 80, tlMap + speeder, 0);
-  vertex(topRight, 80, trMap + speeder, 0);
-  vertex(bottomRight, height, brMap + speeder, 1);
-  vertex(bottomLeft, height, blMap + speeder, 1);
+  vertex(topLeft, 0, tlMap + speeder, 0);
+  vertex(topRight, 0, trMap + speeder, 0);
+  vertex(bottomRight, height - 80, brMap + speeder, 1);
+  vertex(bottomLeft, height - 80, blMap + speeder, 1);
   endShape(CLOSE);
 }
 

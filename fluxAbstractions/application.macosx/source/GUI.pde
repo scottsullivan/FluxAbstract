@@ -6,7 +6,14 @@ void setupGUI() {
   controlP5 = new ControlP5(this);
   PFont GUIfont = createFont("arial", 12);
   controlP5.setControlFont(GUIfont);
-  //buttonstuff ("function it fires", ?, XPOS, YPOS, Width, Height).setLabel("LABEL"); 
+
+  controlP5.setColorForeground(0xffcccccc);
+  controlP5.setColorBackground(0xffffffff);
+  controlP5.setColorLabel(0xffff0000);
+  controlP5.setColorValue(0xff444444);
+  controlP5.setColorActive(0xffff0000);
+
+
   controlP5.addButton("export", 50, width - 150, 745, 100, 20).setLabel("Export .gif");
   controlP5.addButton("record", 50, width - 250, 745, 100, 20).setLabel("record");
 
@@ -27,10 +34,10 @@ void drawGUI() {
   textureWrap(REPEAT); 
   beginShape();
   texture(imgOne);
-  vertex(49, 735, 0, 0);
-  vertex(135, 735, 1, 0);
-  vertex(135, 783, 1, 1);
-  vertex(49, 783, 0, 1);
+  vertex(149, 735, 0, 0);
+  vertex(235, 735, 1, 0);
+  vertex(235, 783, 1, 1);
+  vertex(149, 783, 0, 1);
   endShape(CLOSE);
 
   //drag and drop targets
@@ -38,22 +45,23 @@ void drawGUI() {
   textureWrap(REPEAT); 
   beginShape();
   texture(imgTwo);
-  vertex(149, 735, 0, 0);
-  vertex(235, 735, 1, 0);
-  vertex(235, 783, 1, 1);
-  vertex(149, 783, 0, 1);
+  vertex(249, 735, 0, 0);
+  vertex(335, 735, 1, 0);
+  vertex(335, 783, 1, 1);
+  vertex(249, 783, 0, 1);
   endShape(CLOSE);
 }
 
 void drawGUIBackground() {
   fill(0);
   rect(0, 720, width, 80);
+  image(logo, 50, 735);
 }
 
 
 void dropEvent(DropEvent theDropEvent) {
   if (theDropEvent.isImage()) {
-    if (theDropEvent.x() < 135) {
+    if (theDropEvent.x() < 249) {
       imgOne = theDropEvent.loadImage();
     }
     else {
@@ -75,8 +83,8 @@ class DropListenerOne extends DropListener {
   void draw(int boxX, int boxY, int boxWidth, int boxHeight) {
     noFill();
     stroke(myColor);
-    rect(49, 735, 86, 48);
     rect(149, 735, 86, 48);
+    rect(249, 735, 86, 48);
   }
 
   void dropEnter() {

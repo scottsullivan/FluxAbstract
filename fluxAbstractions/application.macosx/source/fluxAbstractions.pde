@@ -11,7 +11,7 @@ import sojamo.drop.*;
 SDrop dropOne;
 
 float thickness, speed, angle, topRight, topLeft, bottomRight, bottomLeft, speeder;
-PImage imgOne, imgTwo;
+PImage imgOne, imgTwo, logo;
 boolean recordCheck;
 
 float spdMap = map(speed, 0, 100, 0, .0001);
@@ -23,16 +23,15 @@ void setup() {
   background(255);
   smooth();
   noStroke();
-  frameRate(30);
 
   imgOne = loadImage("emptypic1.jpg");
   imgTwo = loadImage("emptypic2.jpg");
+  logo = loadImage("fastcodesignlogo.png");
 
   setupGUI();
 
-
-  gifExport = new GifMaker(this, "export.gif", 1);
-  gifExport.setQuality(1);
+  gifExport = new GifMaker(this, "export.gif", 10);
+  gifExport.setQuality(10);
   gifExport.setSize(1280, 720);
 }
 
@@ -40,7 +39,7 @@ void draw() {
   background(255);
   drawGUI();
 
-  dropTargetOne.draw(49, 735, 186, 48);
+  dropTargetOne.draw(149, 735, 186, 48);
   if (imgOne !=null) {
   }
 
@@ -57,16 +56,18 @@ void draw() {
 }
 
 void record() {
-  for (int i = 1; i < 10; i++) {
+  for (int i = 1; i < 30; i++) {
     gifExport.setRepeat(0);
-    gifExport.setDelay(33);
-    renderOne(i, imgOne);
-    renderTwo(i, imgTwo);
-    if (speeder < 1) {
-      speeder = speeder + spdMap;
-    } 
-    else {
-      speeder = 0;
+    gifExport.setDelay(10);
+    for (int c = -50; c < 150; c = c + 2) {
+      renderOne(c, imgOne);
+      renderTwo(c, imgTwo);
+      if (speeder < 1) {
+        speeder = speeder + spdMap;
+      } 
+      else {
+        speeder = 0;
+      }
     }
     gifExport.addFrame();
   }

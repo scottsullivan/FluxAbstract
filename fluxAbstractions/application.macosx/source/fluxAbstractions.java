@@ -32,7 +32,7 @@ ControlP5 controlP5;
 SDrop dropOne;
 
 float thickness, speed, angle, topRight, topLeft, bottomRight, bottomLeft, speeder;
-PImage imgOne, imgTwo;
+PImage imgOne, imgTwo, logo;
 boolean recordCheck;
 
 float spdMap = map(speed, 0, 100, 0, .0001f);
@@ -44,16 +44,15 @@ public void setup() {
   background(255);
   smooth();
   noStroke();
-  frameRate(30);
 
   imgOne = loadImage("emptypic1.jpg");
   imgTwo = loadImage("emptypic2.jpg");
+  logo = loadImage("fastcodesignlogo.png");
 
   setupGUI();
 
-
-  gifExport = new GifMaker(this, "export.gif", 1);
-  gifExport.setQuality(1);
+  gifExport = new GifMaker(this, "export.gif", 10);
+  gifExport.setQuality(10);
   gifExport.setSize(1280, 720);
 }
 
@@ -61,7 +60,7 @@ public void draw() {
   background(255);
   drawGUI();
 
-  dropTargetOne.draw(49, 735, 186, 48);
+  dropTargetOne.draw(149, 735, 186, 48);
   if (imgOne !=null) {
   }
 
@@ -78,16 +77,18 @@ public void draw() {
 }
 
 public void record() {
-  for (int i = 1; i < 10; i++) {
+  for (int i = 1; i < 30; i++) {
     gifExport.setRepeat(0);
-    gifExport.setDelay(33);
-    renderOne(i, imgOne);
-    renderTwo(i, imgTwo);
-    if (speeder < 1) {
-      speeder = speeder + spdMap;
-    } 
-    else {
-      speeder = 0;
+    gifExport.setDelay(10);
+    for (int c = -50; c < 150; c = c + 2) {
+      renderOne(c, imgOne);
+      renderTwo(c, imgTwo);
+      if (speeder < 1) {
+        speeder = speeder + spdMap;
+      } 
+      else {
+        speeder = 0;
+      }
     }
     gifExport.addFrame();
   }
@@ -105,7 +106,14 @@ public void setupGUI() {
   controlP5 = new ControlP5(this);
   PFont GUIfont = createFont("arial", 12);
   controlP5.setControlFont(GUIfont);
-  //buttonstuff ("function it fires", ?, XPOS, YPOS, Width, Height).setLabel("LABEL"); 
+
+  controlP5.setColorForeground(0xffcccccc);
+  controlP5.setColorBackground(0xffffffff);
+  controlP5.setColorLabel(0xffff0000);
+  controlP5.setColorValue(0xff444444);
+  controlP5.setColorActive(0xffff0000);
+
+
   controlP5.addButton("export", 50, width - 150, 745, 100, 20).setLabel("Export .gif");
   controlP5.addButton("record", 50, width - 250, 745, 100, 20).setLabel("record");
 
@@ -126,10 +134,10 @@ public void drawGUI() {
   textureWrap(REPEAT); 
   beginShape();
   texture(imgOne);
-  vertex(49, 735, 0, 0);
-  vertex(135, 735, 1, 0);
-  vertex(135, 783, 1, 1);
-  vertex(49, 783, 0, 1);
+  vertex(149, 735, 0, 0);
+  vertex(235, 735, 1, 0);
+  vertex(235, 783, 1, 1);
+  vertex(149, 783, 0, 1);
   endShape(CLOSE);
 
   //drag and drop targets
@@ -137,22 +145,23 @@ public void drawGUI() {
   textureWrap(REPEAT); 
   beginShape();
   texture(imgTwo);
-  vertex(149, 735, 0, 0);
-  vertex(235, 735, 1, 0);
-  vertex(235, 783, 1, 1);
-  vertex(149, 783, 0, 1);
+  vertex(249, 735, 0, 0);
+  vertex(335, 735, 1, 0);
+  vertex(335, 783, 1, 1);
+  vertex(249, 783, 0, 1);
   endShape(CLOSE);
 }
 
 public void drawGUIBackground() {
   fill(0);
   rect(0, 720, width, 80);
+  image(logo, 50, 735);
 }
 
 
 public void dropEvent(DropEvent theDropEvent) {
   if (theDropEvent.isImage()) {
-    if (theDropEvent.x() < 135) {
+    if (theDropEvent.x() < 249) {
       imgOne = theDropEvent.loadImage();
     }
     else {
@@ -174,8 +183,8 @@ class DropListenerOne extends DropListener {
   public void draw(int boxX, int boxY, int boxWidth, int boxHeight) {
     noFill();
     stroke(myColor);
-    rect(49, 735, 86, 48);
     rect(149, 735, 86, 48);
+    rect(249, 735, 86, 48);
   }
 
   public void dropEnter() {

@@ -51,8 +51,7 @@ public void setup() {
 
   setupGUI();
 
-  gifExport = new GifMaker(this, "export.gif", 10);
-  gifExport.setQuality(10);
+  gifExport = new GifMaker(this, month() + "_" + day() + "_" + year() + "-" + hour() + "_" + minute() + "_" + second() + ".gif", 10);
   gifExport.setSize(1280, 720);
 }
 
@@ -79,7 +78,7 @@ public void draw() {
 public void record() {
   for (int i = 1; i < 30; i++) {
     gifExport.setRepeat(0);
-    gifExport.setDelay(10);
+    gifExport.setDelay(1);
     for (int c = -50; c < 150; c = c + 2) {
       renderOne(c, imgOne);
       renderTwo(c, imgTwo);
@@ -96,6 +95,7 @@ public void record() {
 
 public void export() {
   gifExport.finish();
+  exit();
 }
 
 public void setupGUI() {

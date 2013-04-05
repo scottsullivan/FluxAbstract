@@ -1,37 +1,34 @@
 //fastco
 
-import gifAnimation.*;
-import processing.opengl.*;
-GifMaker gifExport;
-
 import controlP5.*;
 ControlP5 controlP5;
 
 import sojamo.drop.*;
 SDrop dropOne;
 
+import unlekker.moviemaker.*;
+UMovieMaker mm;
+
 float thickness, speed, angle, topRight, topLeft, bottomRight, bottomLeft, speeder;
 PImage imgOne, imgTwo, logo;
-boolean recordCheck;
 
 float spdMap = map(speed, 0, 100, 0, .0001);
 
 DropListenerOne dropTargetOne;
 
 void setup() {
-  size(1280, 800, P2D);
+  size(1280, 720, P2D);
   background(255);
   smooth();
   noStroke();
-
-  imgOne = loadImage("emptypic1.jpg");
-  imgTwo = loadImage("emptypic2.jpg");
+  frameRate(30);
+  imgOne = loadImage("img1.jpg");
+  imgTwo = loadImage("img2.jpg");
   logo = loadImage("fastcodesignlogo.png");
 
   setupGUI();
 
-  gifExport = new GifMaker(this, month() + "_" + day() + "_" + year() + "-" + hour() + "_" + minute() + "_" + second() + ".gif", 10);
-  gifExport.setSize(1280, 720);
+  mm = new UMovieMaker(this, sketchPath(month() + "_" + day() + "_" + year() + "-" + hour() + "_" + minute() + "_" + second() +".mov"), width, 720, 30);
 }
 
 void draw() {
@@ -54,26 +51,32 @@ void draw() {
   }
 }
 
-void record() {
-  for (int i = 1; i < 30; i++) {
-    gifExport.setRepeat(0);
-    gifExport.setDelay(1);
-    for (int c = -50; c < 150; c = c + 2) {
-      renderOne(c, imgOne);
-      renderTwo(c, imgTwo);
-      if (speeder < 1) {
-        speeder = speeder + spdMap;
-      } 
-      else {
-        speeder = 0;
+//void record() {
+
+void keyPressed() {
+  if (key == 'r') {
+    for (int i = 1; i < 2500; i++) {
+      for (int c = -50; c < 150; c = c + 2) {
+        renderOne(c, imgOne);
+        renderTwo(c, imgTwo);
+        if (speeder < 1) {
+          speeder = speeder + spdMap;
+        } 
+        else {
+          speeder = 0;
+        }
       }
+      mm.addFrame();
     }
-    gifExport.addFrame();
+  }
+  if (key == 'x') {
+    mm.finish();
+    exit();
   }
 }
 
 void export() {
-  gifExport.finish();
+  mm.finish();
   exit();
 }
 

@@ -1,6 +1,6 @@
 Flux Abstract (moving abstraction)
 ======
-This is an open source application written for <a href="http://www.fastcodesign.com/">Fast Company Design</a>. It is written in <a href="http://processing.org/">Processing</a>
+This is an open source application written for <a href="http://www.fastcodesign.com/">Fast Company Design</a>. It is written in <a href="http://processing.org/">Processing</a>. Right now there are two versions, a .gif exporting version, and a video exporting version. The video exporting version is in a pre-alpha nearly unusable state at the moment though.
 
 ### What it looks like
 <a href="https://vimeo.com/63240936">Video on Vimeo</a>

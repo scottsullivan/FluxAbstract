@@ -9,7 +9,7 @@ This is an open source application written for <a href="http://www.fastcodesign.
    * <a href="http://www.sojamo.de/libraries/controlP5/">controlP5</a> by Andreas Schlegel
    * <a href="http://www.sojamo.de/libraries/drop/">sDrop</a> by Andreas Schlegel
    * <a href="http://www.extrapixel.ch/processing/gifAnimation/">gifAnimation Processing Library</a> by extrapixel (gif version only)
-   * <a href="http://workshop.evolutionzone.com/2013/03/18/modelbuilder-0020-and-umoviemaker/">UMovieMaker</a> by Marius Watz (Video version only)
+   * <a href="http://gsvideo.sourceforge.net/">GSVideo</a> by Andres Colubri (Video version only)
 
 To run the program, you don't need Processing, in the main folder, there's a folder called application.macosx with a .app of the sketch that you can run without the libraries.
 

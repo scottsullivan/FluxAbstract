@@ -3,21 +3,25 @@
 import codeanticode.gsvideo.*;
 GSMovieMaker mm;
 
-
 import controlP5.*;
 ControlP5 controlP5;
 
 import sojamo.drop.*;
 SDrop dropOne;
 
+import java.awt.Frame;
+import java.awt.BorderLayout;
+import controlP5.*;
+
+private ControlP5 cp5;
+
+ControlFrame cf;
+
 float thickness, speed, angle, topRight, topLeft, bottomRight, bottomLeft, speeder;
 PImage imgOne, imgTwo, logo;
-
 float spdMap = map(speed, 0, 100, 0, .0001);
-boolean visible = true;
-
 int fps = 30;
-
+int def;
 DropListenerOne dropTargetOne;
 
 void setup() {
@@ -34,15 +38,16 @@ void setup() {
   mm = new GSMovieMaker(this, width, height, "drawing.ogg", GSMovieMaker.THEORA, GSMovieMaker.MEDIUM, fps);
   mm.setQueueSize(0, 10);
 
+  cp5 = new ControlP5(this);
+  cf = addControlFrame("extra", 200, 200);
+
   setupGUI();
   mm.start();
 }
 
 void draw() {
   background(255);
-  if (visible) {
-    drawGUI();
-  }
+  drawGUI();
 
   dropTargetOne.draw(149, 735, 186, 48);
   if (imgOne !=null) {
@@ -63,7 +68,6 @@ void draw() {
 
 
 void record() {
-  visible = false;
   String s = "Frame " + frameCount;
 
   for (int i = 1; i < 500; i++) {

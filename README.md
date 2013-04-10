@@ -1,6 +1,6 @@
 Flux Abstract (moving abstraction)
 ======
-This is an open source application written for <a href="http://www.fastcodesign.com/">Fast Company Design</a>. It is written in <a href="http://processing.org/">Processing</a>. Right now there are two versions, a .gif exporting version, and a video exporting version. The video exporting version is in a pre-alpha nearly unusable state at the moment though.
+This is an open source application written for <a href="http://www.fastcodesign.com/">Fast Company Design</a>. It is written in <a href="http://processing.org/">Processing</a>. 
 
 ### What it looks like
 <a href="https://vimeo.com/63240936">Video on Vimeo</a>
@@ -8,8 +8,7 @@ This is an open source application written for <a href="http://www.fastcodesign.
 ### Libraries you need to install in Processing
    * <a href="http://www.sojamo.de/libraries/controlP5/">controlP5</a> by Andreas Schlegel
    * <a href="http://www.sojamo.de/libraries/drop/">sDrop</a> by Andreas Schlegel
-   * <a href="http://www.extrapixel.ch/processing/gifAnimation/">gifAnimation Processing Library</a> by extrapixel (gif version only)
-   * <a href="http://gsvideo.sourceforge.net/">GSVideo</a> by Andres Colubri (Video version only)
+   * <a href="http://gsvideo.sourceforge.net/">GSVideo</a> by Andres Colubri
 
 To run the program, you don't need Processing, in the main folder, there's a folder called application.macosx with a .app of the sketch that you can run without the libraries.
 

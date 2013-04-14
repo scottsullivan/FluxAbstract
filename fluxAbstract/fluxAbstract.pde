@@ -12,15 +12,18 @@ SDrop dropOne;
 
 float topRight, topLeft, bottomRight, bottomLeft, speeder;
 float thickness = 100;
-float speed = 2;
+float speed = 0;
 float angle = 85;
+float duration = 80;
 
 PImage imgOne, imgTwo, logo;
 
 float spdMap = map(speed, 0, 100, 0, .0001);
 boolean showTargets = true;
+boolean areWeRecording = false;
+boolean wereWeRecording = false;
 
-int fps = 30;
+int fps = 25;
 
 DropListenerOne dropTargetOne;
 
@@ -33,6 +36,8 @@ private ControlP5 cp5;
 ControlFrame cf;
 
 int def;
+
+int timer = round(duration * -10000);
 
 void setup() {
   size(1280, 720, P2D);
@@ -51,11 +56,13 @@ void setup() {
   setupGUI();
   mm.start();
   cp5 = new ControlP5(this);
-  cf = addControlFrame("extra", 200, 720);
+  cf = addControlFrame("controls", 200, 280);
 }
 
 void draw() {
   background(255);
+
+  float frameNumber = mm.getQueuedFrames();
 
   for (int i = -50; i < 150; i = i + 2) {
     renderOne(i, imgOne);
@@ -73,31 +80,37 @@ void draw() {
     drawGUI();
     dropTargetOne.draw(149, 735, 186, 48);
   }
-}
 
-void record() {
-  String s = "Frame " + frameCount;
+  //  if (exportButton==true) {
+  //    exportNotify();
+  //  } else {drawGUI();}
 
-  for (int i = 1; i < 8000; i++) {
-    for (int c = -50; c < 150; c = c + 2) {
-      renderOne(c, imgOne);
-      renderTwo(c, imgTwo);
-      if (speeder < 1) {
-        speeder = speeder + spdMap;
-      } 
-      else {
-        speeder = 0;
-      }
-    }
+  if (millis() - timer < round(duration * 10000)) {
+    String s = "Frame " + frameCount;
+
     loadPixels();
     mm.addFrame(pixels);
     println("Number of queued frames : " + mm.getQueuedFrames());
     println("Number of dropped frames: " + mm.getDroppedFrames());
+    areWeRecording = true;
+  } 
+  else {
+    areWeRecording = false;
+  }
+
+  if (!wereWeRecording && areWeRecording) {
+    wereWeRecording = true;
+  }
+  if (wereWeRecording && !areWeRecording) { 
+    mm.finish();
+    exit();
   }
 }
 
-void export() {
-  mm.finish();
-  exit();
+void record() {
+  timer = millis();
 }
+
+//void export() {
+//}
 

@@ -6,15 +6,17 @@ void setupGUI() {
   controlP5 = new ControlP5(this);
 
   controlP5.setColorForeground(0xffcccccc);
-  controlP5.setColorBackground(0xff444444);
-  controlP5.setColorLabel(0xffff0000);
+  controlP5.setColorBackground(0xffff0000);
+  controlP5.setColorLabel(0xffffffff);
   controlP5.setColorValue(0xffffffff);
-  controlP5.setColorActive(0xffff0000);
+  controlP5.setColorActive(0xffffffff);
 
-
-  controlP5.addButton("export", 50, width - 150, 665, 100, 20).setLabel("Export movie");
-  controlP5.addButton("record", 50, width - 250, 665, 100, 20).setLabel("record");
+  controlP5.addButton("record", 50, 0, 0, 50, 50).setLabel("record");
 }
+
+//void exportNotify() {
+//
+//}
 
 void drawGUI() {
   //drag and drop targets

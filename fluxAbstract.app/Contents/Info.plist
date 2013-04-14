@@ -36,7 +36,7 @@
     <key>Java</key>
     <dict>
       <key>VMOptions</key>
-      <string> -Xms64m -Xmx2000m</string>
+      <string> -Xms64m -Xmx10000m</string>
 
       <key>MainClass</key>
       <string>fluxAbstract</string>

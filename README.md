@@ -2,8 +2,7 @@ Flux Abstract (moving abstraction)
 ======
 This is an open source application written for <a href="http://www.fastcodesign.com/">Fast Company Design</a>. It is written in <a href="http://processing.org/">Processing</a>. 
 
-### What it looks like
-<a href="https://vimeo.com/63240936">Video on Vimeo</a>
+<a href="https://vimeo.com/64033911">Walkthrough of the application on Vimeo</a>
 
 ### Libraries you need to install in Processing
    * <a href="http://www.sojamo.de/libraries/controlP5/">controlP5</a> by Andreas Schlegel
